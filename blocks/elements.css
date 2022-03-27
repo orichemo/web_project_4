@@ -1,0 +1,28 @@
+.elements__list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  row-gap: 20px;
+  column-gap: 17px;
+  flex-wrap: wrap;
+  max-width: 100%;
+  margin: 50px auto 0;
+  justify-content: center;
+}
+
+.elements__list-item {
+  max-width: 282px;
+}
+
+@media screen and (max-width: 1055px) {
+  .elements__list {
+    max-width: calc((288px * 2) + 17px);
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .elements__list {
+    max-width: 288px;
+    margin-top: 36px;
+  }
+}

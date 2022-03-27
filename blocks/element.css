@@ -1,0 +1,46 @@
+.element {
+  background-color: #fff;
+  color: #000;
+  border-radius: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.element__photo {
+  display: block;
+}
+
+.element__info {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 15px 31px 21px;
+}
+
+.element__title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.2;
+  max-height: 23px;
+}
+
+.element__like-button {
+  border: none;
+  width: 21px;
+  height: 19px;
+  background-color: #FFF;
+  padding: 0;
+  background-image: url(../images/like-button.svg);
+  background-repeat: no-repeat;
+}
+
+.element__like-button_staus_active {
+  background-image: url(../images/black-like.svg);
+  background-repeat: no-repeat;
+}
+
+.element__icon-like {
+  display: block;
+  max-width: 21px;
+}
