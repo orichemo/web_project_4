@@ -2,9 +2,6 @@
   background-color: #fff;
   color: #000;
   border-radius: 10px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 .element__photo {
@@ -29,7 +26,7 @@
   border: none;
   width: 21px;
   height: 19px;
-  background-color: #FFF;
+  background-color: #fff;
   padding: 0;
   background-image: url(../images/like-button.svg);
   background-repeat: no-repeat;
