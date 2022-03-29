@@ -6,13 +6,11 @@
 @media screen and (max-width: 1055px) {
   .main {
     max-width: 100%;
-    margin: 0 auto;
   }
 }
 
 @media screen and (max-width: 320px) {
   .main {
     max-width: 282px;
-    margin: 0 auto;
   }
 }

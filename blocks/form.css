@@ -53,4 +53,8 @@
   .form__input:last-of-type {
     margin-bottom: 46px;
   }
+  .form__button-save {
+    font-size: 14px;
+    line-height: 1.21;
+  }
 }

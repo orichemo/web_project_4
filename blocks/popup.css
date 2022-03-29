@@ -6,31 +6,30 @@
   left: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
+  display: none;
 }
 
-.popup_opened {
-  display: none;
+.popup_open {
+  display: flex;
 }
 
 .popup__container {
   max-width: 430px;
   width: 430px;
-  max-height: 345px; /*there is a problem with the
-   size from figma ths line hight is bigger than the box high so I need to apply min-hight to
-   every heading or text that have this properties */
+  height: fit-content;
   background-color: #fff;
   padding: 34px 0 36.51px;
   box-sizing: border-box;
   border-radius: 10px;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
   color: #000;
-  margin-top: 165px;
   position: relative;
 }
 
 .popup__close-button {
-  background-color: #000;
+  background-color: transparent;
   position: absolute;
   top: -40px;
   right: -45px;
@@ -51,7 +50,7 @@
   font-size: 24px;
   font-weight: 900;
   max-width: 330px;
-  line-height: 0.95; /*should be 29px but the hight of title is 23px so its a conflict here*/
+  line-height: 1.2;
 }
 
 @media screen and (max-width: 1055px) {
@@ -70,12 +69,5 @@
     margin: 0 auto 76px;
     max-width: 238px;
     font-size: 18px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .popup__container {
-    max-height: 322px;
-    margin-top: 123px;
   }
 }
