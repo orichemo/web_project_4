@@ -1,4 +1,4 @@
-.elements__list {
+.cards {
   list-style: none;
   padding: 0;
   display: flex;
@@ -6,22 +6,18 @@
   column-gap: 17px;
   flex-wrap: wrap;
   max-width: 100%;
-  margin: 50px auto 0;
   justify-content: flex-start;
-}
-
-.elements__list-item {
-  max-width: 282px;
+  margin: 50px auto 0;
 }
 
 @media screen and (max-width: 1055px) {
-  .elements__list {
+  .cards {
     max-width: calc((288px * 2) + 17px);
   }
 }
 
 @media screen and (max-width: 640px) {
-  .elements__list {
+  .cards {
     max-width: 288px;
     margin-top: 36px;
   }

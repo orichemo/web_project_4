@@ -29,6 +29,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  max-width: 415px;
 }
 
 .profile__edit-button {
@@ -92,6 +93,10 @@
   .profile__name {
     font-size: 22px;
     line-height: 1.22;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 230px;
   }
   .profile__edit-button {
     max-width: 18px;
