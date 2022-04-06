@@ -1,5 +1,5 @@
 //popup-edit profile
-const openFormButton = document.querySelector(".profile__edit-button");
+const openProfileFormButton = document.querySelector(".profile__edit-button");
 const popupProfile = document.querySelector(".popup_type_profile");
 const closeFormButton = popupProfile.querySelector(".popup__close-button");
 const profileName = document.querySelector(".profile__name");
@@ -36,26 +36,30 @@ const initialCards = [
 ];
 //popup add card
 const popupPhoto = document.querySelector(".popup_type_photo");
-const photoWhenPop = popupPhoto.querySelector(".popup__img");
+const popupPhotoImage = popupPhoto.querySelector(".popup__img");
 const photoTitle = popupPhoto.querySelector(".popup__photo-title");
-const closePopupPhoto = popupPhoto.querySelector(".popup__close-button");
+const popupPhotoCloseButton = popupPhoto.querySelector(".popup__close-button");
 const cardsContainer = document.querySelector(".cards");
 const openAddButton = document.querySelector(".profile__add-button");
 const popupCards = document.querySelector(".popup_type_cards");
-const closeButtonCards = popupCards.querySelector(".popup__close-button");
+const popupCardCloseButton = popupCards.querySelector(".popup__close-button");
 const formCard = popupCards.querySelector(".popup__form");
 //fill the form with profile info
-function fillFormWhenOpen() {
+function fillProfileForm() {
   inputName.value = profileName.textContent;
   inputBreed.value = profileBreed.textContent;
 }
 //open popupbox
-const toggleOpen = (openBox) => {
-  openBox.classList.toggle("popup_open");
+const popupOpen = (popup) => {
+  popup.classList.add("popup_open");
 };
 //close popupbox
-const toggleClose = (closeBox) => {
-  closeBox.classList.toggle("popup_open");
+const popupClose = (popup) => {
+  popup.classList.remove("popup_open");
+};
+
+const activeButton = (button, mod) => {
+  button.classList.toggle(mod);
 };
 //create cards
 function createCard(data) {
@@ -63,24 +67,25 @@ function createCard(data) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const likeButton = cardElement.querySelector(".card__like-button");
   const trashButton = cardElement.querySelector(".card__trash-button");
-  cardElement.querySelector(".card__title").textContent = data.name;
-
+  const cardTitle = cardElement.querySelector(".card__title");
   const cardPhoto = cardElement.querySelector(".card__photo");
+  cardTitle.textContent = data.name;
   cardPhoto.src = data.link;
   cardPhoto.alt = `Beautiful view of ${data.name}`;
 
-  likeButton.addEventListener("click", function (event) {
-    event.target.classList.toggle("card__like-button_active");
-  });
+  likeButton.addEventListener("click", () =>
+    activeButton(likeButton, "card__like-button_active")
+  );
 
   trashButton.addEventListener("click", function () {
     cardElement.remove();
   });
 
   cardPhoto.addEventListener("click", function (event) {
-    photoWhenPop.src = data.link;
+    popupPhotoImage.src = data.link;
+    popupPhotoImage.alt = `Beautiful view of ${data.name}`;
     photoTitle.textContent = data.name;
-    toggleOpen(popupPhoto);
+    popupOpen(popupPhoto);
   });
 
   return cardElement;
@@ -95,7 +100,7 @@ function handleProfileFormSubmit(e) {
   e.preventDefault();
   profileName.textContent = inputName.value;
   profileBreed.textContent = inputBreed.value;
-  toggleClose(popupProfile);
+  popupClose(popupProfile);
 }
 //submit popup add card
 function handleCardSubmit(e) {
@@ -112,15 +117,15 @@ function handleCardSubmit(e) {
   cardsContainer.prepend(createCard(newCard));
   formCard.reset();
 
-  toggleClose(popupCards);
+  popupClose(popupCards);
 }
 //call open and close popup box
-openFormButton.addEventListener("click", () => fillFormWhenOpen());
-openFormButton.addEventListener("click", () => toggleOpen(popupProfile));
-closeFormButton.addEventListener("click", () => toggleClose(popupProfile));
-closePopupPhoto.addEventListener("click", () => toggleClose(popupPhoto));
-openAddButton.addEventListener("click", () => toggleOpen(popupCards));
-closeButtonCards.addEventListener("click", () => toggleClose(popupCards));
+openProfileFormButton.addEventListener("click", () => fillProfileForm());
+openProfileFormButton.addEventListener("click", () => popupOpen(popupProfile));
+closeFormButton.addEventListener("click", () => popupClose(popupProfile));
+popupPhotoCloseButton.addEventListener("click", () => popupClose(popupPhoto));
+openAddButton.addEventListener("click", () => popupOpen(popupCards));
+popupCardCloseButton.addEventListener("click", () => popupClose(popupCards));
 //call submit popup
 formProfile.addEventListener("submit", handleProfileFormSubmit);
 formCard.addEventListener("submit", handleCardSubmit);
