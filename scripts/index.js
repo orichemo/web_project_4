@@ -66,7 +66,7 @@ const popupClose = (popup) => {
 
 const resetFormCard = () => {
   formCard.reset();
-  buttonCardSubmit.classList.add("form__button_disable");
+  buttonCardSubmit.classList.add("form__submit_disable");
   buttonCardSubmit.disabled = true;
 };
 
@@ -128,7 +128,7 @@ function handleCardSubmit(e) {
 
   cardsContainer.prepend(createCard(newCard));
   formCard.reset();
-  activeButton(buttonCardSubmit, "form__button_disable");
+  activeButton(buttonCardSubmit, "form__submit_disable");
   buttonCardSubmit.disabled = true;
 
   popupClose(popupCards);
