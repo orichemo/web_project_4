@@ -59,8 +59,10 @@
           aria-label="close"
         ></button>
         <h2 class="popup__title">Edit profile</h2>
-        <form name="edit-form" class="form popup__form">
+        <form name="edit-form" class="form popup__form" novalidate>
           <fieldset class="form__fieldset">
+            <span class="form__input-error name-error"></span>
+
             <input
               type="text"
               class="form__input form__input_type_name"
@@ -68,7 +70,10 @@
               name="name"
               placeholder="Enter your name"
               required
+              minlength="2"
+              maxlength="40"
             />
+            <span class="form__input-error about-me-error"></span>
             <input
               type="text"
               class="form__input form__input_type_about-me"
@@ -76,8 +81,12 @@
               name="about-me"
               placeholder="A few words about you"
               required
+              minlength="2"
+              maxlength="200"
             />
-            <button type="submit" class="form__button-save">Save</button>
+            <button type="submit" class="form__button-save form__submit">
+              Save
+            </button>
           </fieldset>
         </form>
       </div>
@@ -91,8 +100,9 @@
           aria-label="close"
         ></button>
         <h2 class="popup__title">New place</h2>
-        <form name="add-form" class="form popup__form">
+        <form name="add-form" class="form popup__form" novalidate>
           <fieldset class="form__fieldset">
+            <span class="form__input-error place-title-error"></span>
             <input
               type="text"
               class="form__input form__input_type_title"
@@ -100,7 +110,10 @@
               name="place-title"
               placeholder="Title"
               required
+              minlength="1"
+              maxlength="300"
             />
+            <span class="form__input-error image-error"></span>
             <input
               type="url"
               class="form__input form__input_type_image"
@@ -109,13 +122,19 @@
               placeholder="Image link"
               required
             />
-            <button type="submit" class="form__button-save">Create</button>
+            <button
+              type="submit"
+              class="form__button-save form__submit form__button_disable"
+              disabled
+            >
+              Create
+            </button>
           </fieldset>
         </form>
       </div>
     </div>
 
-    <div class="popup popup_type_photo">
+    <div class="popup popup_type_photo" novalidate>
       <div class="popup__container popup__container_type_photo">
         <button
           class="popup__close-button"
@@ -147,5 +166,6 @@
     </template>
 
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>

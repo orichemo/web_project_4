@@ -7,6 +7,7 @@ const profileBreed = document.querySelector(".profile__about-me");
 const formProfile = popupProfile.querySelector(".popup__form");
 const inputName = formProfile.querySelector(".form__input_type_name");
 const inputBreed = formProfile.querySelector(".form__input_type_about-me");
+const buttonProfileSubmit = formProfile.querySelector(".form__submit");
 //initial cards
 const initialCards = [
   {
@@ -44,6 +45,7 @@ const openAddButton = document.querySelector(".profile__add-button");
 const popupCards = document.querySelector(".popup_type_cards");
 const popupCardCloseButton = popupCards.querySelector(".popup__close-button");
 const formCard = popupCards.querySelector(".popup__form");
+const buttonCardSubmit = formCard.querySelector(".form__submit");
 //fill the form with profile info
 function fillProfileForm() {
   inputName.value = profileName.textContent;
@@ -52,15 +54,26 @@ function fillProfileForm() {
 //open popupbox
 const popupOpen = (popup) => {
   popup.classList.add("popup_open");
+  document.addEventListener("keydown", hendelEscapeKey);
+  popup.addEventListener("mousedown", hendelClickToEsc);
 };
 //close popupbox
 const popupClose = (popup) => {
   popup.classList.remove("popup_open");
+  document.removeEventListener("keydown", hendelEscapeKey);
+  popup.removeEventListener("mousedown", hendelClickToEsc);
+};
+
+const resetFormCard = () => {
+  formCard.reset();
+  buttonCardSubmit.classList.add("form__button_disable");
+  buttonCardSubmit.disabled = true;
 };
 
 const activeButton = (button, mod) => {
   button.classList.toggle(mod);
 };
+
 //create cards
 function createCard(data) {
   const cardTemplate = document.querySelector("#card-template").content;
@@ -81,7 +94,7 @@ function createCard(data) {
     cardElement.remove();
   });
 
-  cardPhoto.addEventListener("click", function (event) {
+  cardPhoto.addEventListener("click", function () {
     popupPhotoImage.src = data.link;
     popupPhotoImage.alt = `Beautiful view of ${data.name}`;
     photoTitle.textContent = data.name;
@@ -105,7 +118,6 @@ function handleProfileFormSubmit(e) {
 //submit popup add card
 function handleCardSubmit(e) {
   e.preventDefault();
-
   const inputTitle = document.querySelector(".form__input_type_title");
   const inputImage = document.querySelector(".form__input_type_image");
 
@@ -116,9 +128,25 @@ function handleCardSubmit(e) {
 
   cardsContainer.prepend(createCard(newCard));
   formCard.reset();
+  activeButton(buttonCardSubmit, "form__button_disable");
+  buttonCardSubmit.disabled = true;
 
   popupClose(popupCards);
 }
+
+const hendelEscapeKey = (e) => {
+  const popup = document.querySelector(".popup_open");
+  if (e.key === "Escape") {
+    popupClose(popup);
+  }
+};
+
+const hendelClickToEsc = (e) => {
+  if (e.target.classList.contains("popup")) {
+    popupClose(e.target);
+  }
+};
+
 //call open and close popup box
 openProfileFormButton.addEventListener("click", () => fillProfileForm());
 openProfileFormButton.addEventListener("click", () => popupOpen(popupProfile));
@@ -126,6 +154,7 @@ closeFormButton.addEventListener("click", () => popupClose(popupProfile));
 popupPhotoCloseButton.addEventListener("click", () => popupClose(popupPhoto));
 openAddButton.addEventListener("click", () => popupOpen(popupCards));
 popupCardCloseButton.addEventListener("click", () => popupClose(popupCards));
+popupCardCloseButton.addEventListener("click", resetFormCard);
 //call submit popup
 formProfile.addEventListener("submit", handleProfileFormSubmit);
 formCard.addEventListener("submit", handleCardSubmit);
