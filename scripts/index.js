@@ -52,26 +52,34 @@ function fillProfileForm() {
   inputBreed.value = profileBreed.textContent;
 }
 //open popupbox
-const popupOpen = (popup) => {
+const openPopup = (popup) => {
   popup.classList.add("popup_open");
   document.addEventListener("keydown", hendelEscapeKey);
   popup.addEventListener("mousedown", hendelClickToEsc);
 };
 //close popupbox
-const popupClose = (popup) => {
+const closePopup = (popup) => {
   popup.classList.remove("popup_open");
   document.removeEventListener("keydown", hendelEscapeKey);
   popup.removeEventListener("mousedown", hendelClickToEsc);
 };
 
-const resetFormCard = () => {
-  formCard.reset();
-  buttonCardSubmit.classList.add("form__submit_disable");
-  buttonCardSubmit.disabled = true;
+const selectors = {
+  formSelector: ".popup__form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__submit",
+  inactiveButtonClass: "form__submit_disable",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "form__input-error_active",
 };
 
-const activeButton = (button, mod) => {
-  button.classList.toggle(mod);
+const resetFormCard = () => {
+  formCard.reset();
+  enableButton(buttonCardSubmit, selectors);
+};
+
+const toggleClassName = (element, className) => {
+  element.classList.toggle(className);
 };
 
 //create cards
@@ -87,7 +95,7 @@ function createCard(data) {
   cardPhoto.alt = `Beautiful view of ${data.name}`;
 
   likeButton.addEventListener("click", () =>
-    activeButton(likeButton, "card__like-button_active")
+    toggleClassName(likeButton, "card__like-button_active")
   );
 
   trashButton.addEventListener("click", function () {
@@ -98,7 +106,7 @@ function createCard(data) {
     popupPhotoImage.src = data.link;
     popupPhotoImage.alt = `Beautiful view of ${data.name}`;
     photoTitle.textContent = data.name;
-    popupOpen(popupPhoto);
+    openPopup(popupPhoto);
   });
 
   return cardElement;
@@ -113,7 +121,7 @@ function handleProfileFormSubmit(e) {
   e.preventDefault();
   profileName.textContent = inputName.value;
   profileBreed.textContent = inputBreed.value;
-  popupClose(popupProfile);
+  closePopup(popupProfile);
 }
 //submit popup add card
 function handleCardSubmit(e) {
@@ -127,33 +135,30 @@ function handleCardSubmit(e) {
   };
 
   cardsContainer.prepend(createCard(newCard));
-  formCard.reset();
-  activeButton(buttonCardSubmit, "form__submit_disable");
-  buttonCardSubmit.disabled = true;
-
-  popupClose(popupCards);
+  resetFormCard();
+  closePopup(popupCards);
 }
 
 const hendelEscapeKey = (e) => {
-  const popup = document.querySelector(".popup_open");
   if (e.key === "Escape") {
-    popupClose(popup);
+    const popup = document.querySelector(".popup_open");
+    closePopup(popup);
   }
 };
 
 const hendelClickToEsc = (e) => {
   if (e.target.classList.contains("popup")) {
-    popupClose(e.target);
+    closePopup(e.target);
   }
 };
 
 //call open and close popup box
 openProfileFormButton.addEventListener("click", () => fillProfileForm());
-openProfileFormButton.addEventListener("click", () => popupOpen(popupProfile));
-closeFormButton.addEventListener("click", () => popupClose(popupProfile));
-popupPhotoCloseButton.addEventListener("click", () => popupClose(popupPhoto));
-openAddButton.addEventListener("click", () => popupOpen(popupCards));
-popupCardCloseButton.addEventListener("click", () => popupClose(popupCards));
+openProfileFormButton.addEventListener("click", () => openPopup(popupProfile));
+closeFormButton.addEventListener("click", () => closePopup(popupProfile));
+popupPhotoCloseButton.addEventListener("click", () => closePopup(popupPhoto));
+openAddButton.addEventListener("click", () => openPopup(popupCards));
+popupCardCloseButton.addEventListener("click", () => closePopup(popupCards));
 popupCardCloseButton.addEventListener("click", resetFormCard);
 //call submit popup
 formProfile.addEventListener("submit", handleProfileFormSubmit);

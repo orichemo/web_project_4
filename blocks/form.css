@@ -53,7 +53,7 @@
   color: rgba(0, 0, 0, 0.2);
 }
 
-.form__button-save:hover {
+.form__button-save:hover:not(:disabled) {
   opacity: 0.8;
   cursor: pointer;
 }
