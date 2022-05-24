@@ -23,7 +23,4 @@ const handleOverlay = (e) => {
   }
 };
 
-export {
-  openPopup,
-  closePopup,
-};
+export { openPopup, closePopup };

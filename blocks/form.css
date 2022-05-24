@@ -14,7 +14,6 @@
   font-weight: 400;
   line-height: 1.21;
   padding-bottom: 13.34px;
-  /* margin-bottom: 20px; */
 }
 .form__input_type_error {
   border-bottom-color: #f00;
@@ -29,9 +28,6 @@
   color: #f00;
   font-size: 12px;
   line-height: 15px;
-  /* position: relative;
-  left: 0;
-  bottom: -55px; */
 }
 
 ::-webkit-input-placeholder {
@@ -65,15 +61,6 @@
     max-width: 238px;
     padding: 0 22px;
   }
-  /* .form__input {
-    margin-bottom: 30px;
-  }
-  .form__input-error {
-    bottom: -75px;
-  }
-  .form__input:last-of-type {
-    margin-bottom: 46px;
-  } */
   .form__button-save {
     font-size: 14px;
     line-height: 1.21;
