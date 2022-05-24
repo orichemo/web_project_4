@@ -61,8 +61,6 @@
         <h2 class="popup__title">Edit profile</h2>
         <form name="edit-form" class="form popup__form" novalidate>
           <fieldset class="form__fieldset">
-            <span class="form__input-error name-error"></span>
-
             <input
               type="text"
               class="form__input form__input_type_name"
@@ -73,7 +71,7 @@
               minlength="2"
               maxlength="40"
             />
-            <span class="form__input-error about-me-error"></span>
+            <span class="form__input-error name-error"></span>
             <input
               type="text"
               class="form__input form__input_type_about-me"
@@ -84,6 +82,7 @@
               minlength="2"
               maxlength="200"
             />
+            <span class="form__input-error about-me-error"></span>
             <button type="submit" class="form__button-save form__submit">
               Save
             </button>
@@ -102,7 +101,6 @@
         <h2 class="popup__title">New place</h2>
         <form name="add-form" class="form popup__form" novalidate>
           <fieldset class="form__fieldset">
-            <span class="form__input-error place-title-error"></span>
             <input
               type="text"
               class="form__input form__input_type_title"
@@ -113,7 +111,7 @@
               minlength="1"
               maxlength="300"
             />
-            <span class="form__input-error image-error"></span>
+            <span class="form__input-error place-title-error"></span>
             <input
               type="url"
               class="form__input form__input_type_image"
@@ -122,6 +120,7 @@
               placeholder="Image link"
               required
             />
+            <span class="form__input-error image-error"></span>
             <button
               type="submit"
               class="form__button-save form__submit form__submit_disable"

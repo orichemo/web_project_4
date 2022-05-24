@@ -1,23 +1,23 @@
 const openPopup = (popup) => {
   popup.classList.add("popup_open");
-  document.addEventListener("keydown", handleOverlay);
-  popup.addEventListener("mousedown", hendelClickToEsc);
+  document.addEventListener("keydown", hendelEscapeKey);
+  popup.addEventListener("mousedown", handleOverlay);
 };
 
 const closePopup = (popup) => {
   popup.classList.remove("popup_open");
-  document.removeEventListener("keydown", handleOverlay);
-  popup.removeEventListener("mousedown", hendelClickToEsc);
+  document.removeEventListener("keydown", hendelEscapeKey);
+  popup.removeEventListener("mousedown", handleOverlay);
 };
 
-const handleOverlay = (e) => {
+const hendelEscapeKey = (e) => {
   if (e.key === "Escape") {
     const popup = document.querySelector(".popup_open");
     closePopup(popup);
   }
 };
 
-const hendelClickToEsc = (e) => {
+const handleOverlay = (e) => {
   if (e.target.classList.contains("popup")) {
     closePopup(e.target);
   }

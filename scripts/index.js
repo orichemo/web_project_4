@@ -122,6 +122,7 @@ closeButtons.forEach((button) => {
 
 openProfileFormButton.addEventListener("click", () => {
   formValidators["edit-form"].hideError();
+  formValidators["edit-form"].enableButton();
   fillProfileForm();
   openPopup(popupProfile);
 });
