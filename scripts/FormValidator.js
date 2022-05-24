@@ -75,7 +75,7 @@ export class FormValidator {
     if (this._hasInvalidInput(this._listInputs)) {
       this.disableButton();
     } else {
-      this._enableButton();
+      this.enableButton();
     }
   }
 
