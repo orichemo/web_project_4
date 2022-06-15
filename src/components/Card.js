@@ -1,14 +1,10 @@
-import { openPopup } from "./utils.js";
-
-const popupPhoto = document.querySelector(".popup_type_photo");
-const popupImg = popupPhoto.querySelector(".popup__img");
-const popupPhotoTitle = popupPhoto.querySelector(".popup__photo-title");
-
 export class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._title = data.name;
     this._image = data.link;
+    this._data = data;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -41,7 +37,7 @@ export class Card {
     //trash button
     this._trashButton.addEventListener("click", () => this._clickToRemove());
     //popup photo
-    this._photoCard.addEventListener("click", () => this._clickToLargeImage());
+    this._photoCard.addEventListener("click", () => this._handleCardClick());
   }
 
   _clickLike() {
@@ -50,12 +46,5 @@ export class Card {
 
   _clickToRemove() {
     this._card.remove();
-  }
-
-  _clickToLargeImage() {
-    popupImg.src = this._image;
-    popupImg.alt = `Beautiful view of ${this._title}`;
-    popupPhotoTitle.textContent = this._title;
-    openPopup(popupPhoto);
   }
 }

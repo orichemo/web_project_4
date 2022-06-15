@@ -1,3 +1,4 @@
+/*
 const openPopup = (popup) => {
   popup.classList.add("popup_open");
   document.addEventListener("keydown", hendelEscapeKey);
@@ -23,4 +24,4 @@ const handleOverlay = (e) => {
   }
 };
 
-export { openPopup, closePopup };
+export { openPopup, closePopup }; */
