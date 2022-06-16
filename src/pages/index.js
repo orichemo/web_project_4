@@ -7,8 +7,6 @@ import { UserInfo } from "../components/UserInfo.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import {
   openProfileFormButton,
-  inputName,
-  inputBreed,
   initialCardsData,
   openAddButton,
   config,
@@ -25,17 +23,16 @@ const popupEditProfile = new PopupWithForm(".popup_type_profile", (data) => {
   info.setUserInfo(data.name, data["about-me"]);
 });
 
-const popupCard = new PopupWithForm(".popup_type_cards", (data) => {
-  const newCard = new Card(
-    { name: data["place-title"], link: data.image },
-    "#card-template",
-    () => {
-      popupImage.open(data["place-title"], data.image);
-    }
-  );
+function createCard(item) {
+  const newCard = new Card(item, "#card-template", () => {
+    popupImage.open(item.name, item.link);
+  });
   const cardElement = newCard.generateCard();
-  initialCards.addNewItem(cardElement);
-  formValidators["add-form"].disableButton();
+  return cardElement;
+}
+const popupCard = new PopupWithForm(".popup_type_cards", (data) => {
+  const newCard = { name: data["place-title"], link: data.image };
+  initialCards.addNewItem(createCard(newCard));
   popupCard.close();
 });
 
@@ -49,11 +46,7 @@ const initialCards = new Section(
   {
     data: initialCardsData,
     renderer: (card) => {
-      const newCard = new Card(card, "#card-template", () => {
-        popupImage.open(card.name, card.link);
-      });
-      const cardElement = newCard.generateCard();
-      initialCards.addInitialItems(cardElement);
+      initialCards.addInitialItems(createCard(card));
     },
   },
   ".cards"
@@ -73,14 +66,21 @@ const enableValidationForm = (config) => {
 enableValidationForm(config);
 
 openProfileFormButton.addEventListener("click", () => {
-  formValidators["edit-form"].hideError();
-  formValidators["edit-form"].enableButton();
+  const profileFormValidator = formValidators["edit-form"];
+  profileFormValidator.hideError();
+  profileFormValidator.enableButton();
 
   const initialInfo = info.getUserInfo();
-  inputName.value = initialInfo.name;
-  inputBreed.value = initialInfo.job;
+  const data = { name: initialInfo.name, "about-me": initialInfo.job };
+  popupEditProfile.setInputValues(data);
 
   popupEditProfile.open();
 });
 
-openAddButton.addEventListener("click", () => popupCard.open());
+openAddButton.addEventListener("click", () => {
+  const cardFormValidator = formValidators["add-form"];
+  cardFormValidator.disableButton();
+  cardFormValidator.hideError();
+
+  popupCard.open();
+});

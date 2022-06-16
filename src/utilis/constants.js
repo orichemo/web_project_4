@@ -1,9 +1,5 @@
 //popup-edit profile variables
 const openProfileFormButton = document.querySelector(".profile__edit-button");
-const popupProfile = document.querySelector(".popup_type_profile");
-const formProfile = popupProfile.querySelector(".popup__form");
-const inputName = formProfile.querySelector(".form__input_type_name");
-const inputBreed = formProfile.querySelector(".form__input_type_about-me");
 
 //initial cards
 const initialCardsData = [
@@ -45,11 +41,4 @@ const config = {
   errorClass: "form__input-error_active",
 };
 
-export {
-  openProfileFormButton,
-  inputName,
-  inputBreed,
-  initialCardsData,
-  openAddButton,
-  config,
-};
+export { openProfileFormButton, initialCardsData, openAddButton, config };
