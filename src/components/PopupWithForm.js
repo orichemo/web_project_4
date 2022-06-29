@@ -3,9 +3,11 @@ import { Popup } from "./Popup.js";
 export class PopupWithForm extends Popup {
   constructor(popupName, submitHandler) {
     super(popupName);
-    this._form = this._popup.querySelector(".popup__form");
     this._submitHandler = submitHandler;
+    this._form = this._popup.querySelector(".popup__form");
     this._inputList = Array.from(this._form.querySelectorAll(".form__input"));
+    this._submitButton = this._popup.querySelector(".form__button-save");
+    this._textOnButton = this._submitButton.textContent;
   }
   _getInputValues() {
     const listInputsVelue = {};
@@ -34,5 +36,13 @@ export class PopupWithForm extends Popup {
   close() {
     super.close();
     this._form.reset();
+  }
+
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = "Saving...";
+    } else {
+      this._submitButton.textContent = this._textOnButton;
+    }
   }
 }

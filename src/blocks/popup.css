@@ -64,6 +64,11 @@
   line-height: 1.2;
 }
 
+.popup__title_type_small {
+  margin-bottom: 38px;
+  margin-left: 0;
+}
+
 .popup__img {
   display: block;
   max-width: 75vw;
@@ -96,5 +101,9 @@
     margin: 0 auto 76px;
     max-width: 238px;
     font-size: 18px;
+  }
+  .popup__title_type_small {
+    margin-bottom: 38px;
+    margin-left: 0;
   }
 }
