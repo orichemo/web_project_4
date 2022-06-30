@@ -4,20 +4,20 @@ class Api {
     this._headers = headers;
   }
 
-  _customFetch(res) {
+  _processResponse(res) {
     return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    }).then(this._customFetch);
+    }).then(this._processResponse);
   }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    }).then(this._customFetch);
+    }).then(this._processResponse);
   }
 
   patchUserProfile(name, about) {
@@ -28,7 +28,7 @@ class Api {
         name: name,
         about: about,
       }),
-    }).then(this._customFetch);
+    }).then(this._processResponse);
   }
 
   createCard({ name, link }) {
@@ -39,14 +39,14 @@ class Api {
         name: name,
         link: link,
       }),
-    }).then(this._customFetch);
+    }).then(this._processResponse);
   }
 
   deleteCard(id) {
-    fetch(`https://around.nomoreparties.co/v1/cohort-3-en/cards/${id}`, {
+    return fetch(`https://around.nomoreparties.co/v1/cohort-3-en/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
-    });
+    }).then(this._processResponse);
   }
 
   likeCard(id) {
@@ -56,7 +56,7 @@ class Api {
         method: "PUT",
         headers: this._headers,
       }
-    ).then(this._customFetch);
+    ).then(this._processResponse);
   }
 
   unLikeCard(id) {
@@ -66,7 +66,7 @@ class Api {
         method: "DELETE",
         headers: this._headers,
       }
-    ).then(this._customFetch);
+    ).then(this._processResponse);
   }
 
   changeProfilePicture(link) {
@@ -79,7 +79,7 @@ class Api {
           avatar: link,
         }),
       }
-    ).then(this._customFetch);
+    ).then(this._processResponse);
   }
 }
 
